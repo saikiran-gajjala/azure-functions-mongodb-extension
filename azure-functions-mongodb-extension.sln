@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1704.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azure-functions-mongodb-extension", "azure-functions-mongodb-extension\azure-functions-mongodb-extension.csproj", "{DD1D50DC-C84F-4FBF-AC6D-A7A59DCF98DE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azure-functions-mongodb-extension", "src\azure-functions-mongodb-extension.csproj", "{68FC765C-9F2F-4075-941A-8E6C02D57654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.sample", "samples\dotnet.sample.csproj", "{267C2241-D8B4-4899-94CF-732A72447E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DD1D50DC-C84F-4FBF-AC6D-A7A59DCF98DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD1D50DC-C84F-4FBF-AC6D-A7A59DCF98DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD1D50DC-C84F-4FBF-AC6D-A7A59DCF98DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD1D50DC-C84F-4FBF-AC6D-A7A59DCF98DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68FC765C-9F2F-4075-941A-8E6C02D57654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68FC765C-9F2F-4075-941A-8E6C02D57654}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68FC765C-9F2F-4075-941A-8E6C02D57654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68FC765C-9F2F-4075-941A-8E6C02D57654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31643D9E-E308-40C7-82B7-F0E49FC15C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31643D9E-E308-40C7-82B7-F0E49FC15C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31643D9E-E308-40C7-82B7-F0E49FC15C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31643D9E-E308-40C7-82B7-F0E49FC15C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85823602-AAE5-4EFB-91C1-93F575ADC3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85823602-AAE5-4EFB-91C1-93F575ADC3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85823602-AAE5-4EFB-91C1-93F575ADC3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85823602-AAE5-4EFB-91C1-93F575ADC3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0711B3E-3791-4DEE-BE82-0A231494B947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0711B3E-3791-4DEE-BE82-0A231494B947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0711B3E-3791-4DEE-BE82-0A231494B947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0711B3E-3791-4DEE-BE82-0A231494B947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA91D81C-C3E8-492B-A890-E7C28FD624C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA91D81C-C3E8-492B-A890-E7C28FD624C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA91D81C-C3E8-492B-A890-E7C28FD624C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA91D81C-C3E8-492B-A890-E7C28FD624C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267C2241-D8B4-4899-94CF-732A72447E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267C2241-D8B4-4899-94CF-732A72447E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267C2241-D8B4-4899-94CF-732A72447E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267C2241-D8B4-4899-94CF-732A72447E9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
