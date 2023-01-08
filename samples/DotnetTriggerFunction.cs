@@ -17,10 +17,12 @@ namespace Trigger.Samples
   {
     [FunctionName("Dotnet-Trigger-Function")]
     public static void Run(
-        [MongoDBTrigger(connectionString: "",
-                        database: "hackathon",
-                        collection: "orders",
-                        watchInserts: true)] MongoDBTriggerResponseData responseData,
+        [MongoDBTrigger("%mongodb_connection_string%",
+                        "%database%",
+                        "%collection%",
+                        watchInserts: true,
+                        watchUpdates: false,
+                        watchDeletes : false)] MongoDBTriggerResponseData responseData,
         ILogger log)
     {
       log.LogInformation($"Change document obtained. Reponse: {JsonConvert.SerializeObject(responseData)}");

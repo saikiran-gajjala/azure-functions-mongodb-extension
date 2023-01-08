@@ -10,9 +10,9 @@ namespace Azure.Functions.Extension.MongoDB
     public MongoDBTriggerAttribute(string connectionString,
                                    string database,
                                    string collection,
-                                   bool watchInserts = false,
-                                   bool watchUpdates = false,
-                                   bool watchDeletes = false)
+                                   bool watchInserts = true,
+                                   bool watchUpdates = true,
+                                   bool watchDeletes = true)
     {
       this.ConnectionString = connectionString;
       this.Database = database;
@@ -22,17 +22,17 @@ namespace Azure.Functions.Extension.MongoDB
       this.WatchDeletes = watchDeletes;
     }
 
-    public string ConnectionString { get; private set; }
+    public string ConnectionString { get; set; }
 
-    public string Database { get; private set; }
+    public string Database { get; set; }
 
-    public string Collection { get; private set; }
+    public string Collection { get; set; }
 
-    public bool WatchInserts { get; private set; }
+    public bool WatchInserts { get; set; }
 
-    public bool WatchUpdates { get; private set; }
+    public bool WatchUpdates { get; set; }
 
-    public bool WatchDeletes { get; private set; }
+    public bool WatchDeletes { get; set; }
 
     // Todo:
     public string Filter { get; set; }
