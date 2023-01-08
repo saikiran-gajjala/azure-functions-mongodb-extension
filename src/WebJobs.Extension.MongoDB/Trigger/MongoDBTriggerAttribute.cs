@@ -12,7 +12,8 @@ namespace Azure.Functions.Extension.MongoDB
                                    string collection,
                                    bool watchInserts = true,
                                    bool watchUpdates = true,
-                                   bool watchDeletes = true)
+                                   bool watchDeletes = true,
+                                   bool watchReplaces = true)
     {
       this.ConnectionString = connectionString;
       this.Database = database;
@@ -20,6 +21,7 @@ namespace Azure.Functions.Extension.MongoDB
       this.WatchInserts = watchInserts;
       this.WatchUpdates = watchUpdates;
       this.WatchDeletes = watchDeletes;
+      this.WatchReplaces = watchReplaces;
     }
 
     public string ConnectionString { get; set; }
@@ -33,6 +35,8 @@ namespace Azure.Functions.Extension.MongoDB
     public bool WatchUpdates { get; set; }
 
     public bool WatchDeletes { get; set; }
+
+    public bool WatchReplaces { get; set; }
 
     // Todo:
     public string Filter { get; set; }

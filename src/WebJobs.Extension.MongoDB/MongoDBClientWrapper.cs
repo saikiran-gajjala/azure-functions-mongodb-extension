@@ -7,7 +7,6 @@ namespace Azure.Functions.Extension.MongoDB
 {
   public class MongoDBClientWrapper
   {
-
     private IMongoClient mongoClient;
 
     public MongoDBClientWrapper(string connectionString)
@@ -19,61 +18,51 @@ namespace Azure.Functions.Extension.MongoDB
       }
       catch (MongoException)
       {
-        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from azure frunction.");
+        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from the azure frunction.");
       }
     }
 
     public void Watch(MongoDBTriggerAttribute attribute,
-                                 Action<MongoDBTriggerResponseData> callback,
-                                 CancellationToken cancellationToken)
+                      Action<MongoDBTriggerResponseData> callback,
+                      CancellationToken cancellationToken)
     {
-
-
       var options = new ChangeStreamOptions { FullDocument = ChangeStreamFullDocumentOption.UpdateLookup };
+      BsonArray operations = this.FetchOperations(attribute);
+      var matchStage = new BsonDocument("operationType",
+                  new BsonDocument("$in", operations));
       var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>()
-                    .Match(x => x.OperationType == ChangeStreamOperationType.Insert);
+               .Match(matchStage);
       if (!string.IsNullOrEmpty(attribute.Database) && !string.IsNullOrEmpty(attribute.Collection))
       {
+        // Watches a single collection in a database
         var db = this.mongoClient.GetDatabase(attribute.Database);
         var mongoCollection = db.GetCollection<BsonDocument>(attribute.Collection);
-        this.WatchSingleCollectionInSingleDatabase(mongoCollection, callback, cancellationToken);
+        using (var cursor = mongoCollection.Watch(pipeline, options, cancellationToken))
+        {
+          this.IterateCursor(callback, cursor);
+        }
       }
       else if (!string.IsNullOrEmpty(attribute.Database) && string.IsNullOrEmpty(attribute.Collection))
       {
+        // Watches all collections in a database
         var db = this.mongoClient.GetDatabase(attribute.Database);
-        this.WatchAllCollectionInSingleDatabase(db, callback, cancellationToken);
+        using (var cursor = db.Watch(pipeline, options, cancellationToken))
+        {
+          this.IterateCursor(callback, cursor);
+        }
       }
       else
       {
-        this.WatchAllCollectionInAllDatabases(this.mongoClient, callback, cancellationToken);
+        // Watches all collections in all databases
+        using (var cursor = this.mongoClient.Watch(pipeline, options, cancellationToken))
+        {
+          this.IterateCursor(callback, (IChangeStreamCursor<ChangeStreamDocument<BsonDocument>>)cursor);
+        }
       }
     }
 
-    private void WatchSingleCollectionInSingleDatabase(IMongoCollection<BsonDocument> collection, Action<MongoDBTriggerResponseData> callback, CancellationToken cancellationToken)
-    {
-      using (var cursor = collection.Watch(null, cancellationToken))
-      {
-        this.IterateCursor(callback, cursor);
-      }
-    }
-
-    private void WatchAllCollectionInSingleDatabase(IMongoDatabase database, Action<MongoDBTriggerResponseData> callback, CancellationToken cancellationToken)
-    {
-      using (var cursor = database.Watch(null, cancellationToken))
-      {
-        this.IterateCursor(callback, cursor);
-      }
-    }
-
-    private void WatchAllCollectionInAllDatabases(IMongoClient client, Action<MongoDBTriggerResponseData> callback, CancellationToken cancellationToken)
-    {
-      using (var cursor = client.Watch(null, cancellationToken))
-      {
-        this.IterateCursor(callback, (IChangeStreamCursor<ChangeStreamDocument<BsonDocument>>)cursor);
-      }
-    }
-
-    private void IterateCursor(Action<MongoDBTriggerResponseData> callback, IChangeStreamCursor<ChangeStreamDocument<BsonDocument>> cursor)
+    private void IterateCursor(Action<MongoDBTriggerResponseData> callback,
+                               IChangeStreamCursor<ChangeStreamDocument<BsonDocument>> cursor)
     {
       var enumerator = cursor.ToEnumerable().GetEnumerator();
       while (enumerator.MoveNext())
@@ -94,6 +83,31 @@ namespace Azure.Functions.Extension.MongoDB
         };
         callback(responseData);
       }
+    }
+    private BsonArray FetchOperations(MongoDBTriggerAttribute attribute)
+    {
+      var operations = new BsonArray();
+      if (attribute.WatchInserts)
+      {
+        operations.Add("insert");
+      }
+
+      if (attribute.WatchUpdates)
+      {
+        operations.Add("update");
+      }
+
+      if (attribute.WatchDeletes)
+      {
+        operations.Add("delete");
+      }
+
+      if (attribute.WatchReplaces)
+      {
+        operations.Add("replace");
+      }
+
+      return operations;
     }
   }
 }
