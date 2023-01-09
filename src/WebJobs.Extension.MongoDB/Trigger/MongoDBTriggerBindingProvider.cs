@@ -46,6 +46,8 @@ namespace Azure.Functions.Extension.MongoDB
       attribute.ConnectionString = this.config.ResolveSecureSetting(nameResolver, attribute.ConnectionString);
       attribute.Database = this.config.ResolveSecureSetting(nameResolver, attribute.Database);
       attribute.Collection = this.config.ResolveSecureSetting(nameResolver, attribute.Collection);
+      attribute.WatchFields = this.config.ResolveSecureSetting(nameResolver, attribute.WatchFields);
+      attribute.PipelineMatchStage = this.config.ResolveSecureSetting(nameResolver, attribute.PipelineMatchStage);
       return attribute;
     }
   }

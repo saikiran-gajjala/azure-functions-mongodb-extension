@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
-using MongoDB.Bson;
 
 namespace Azure.Functions.Extension.MongoDB
 {
@@ -13,7 +10,6 @@ namespace Azure.Functions.Extension.MongoDB
   {
     private readonly ITriggeredFunctionExecutor executor;
     private readonly MongoDBTriggerContext context;
-
     private CancellationTokenSource cancellationTokenSource;
 
     public MongoDBChangeStreamListener(ITriggeredFunctionExecutor executor, MongoDBTriggerContext context)
@@ -48,7 +44,6 @@ namespace Azure.Functions.Extension.MongoDB
     }
     public Task StopAsync(CancellationToken cancellationToken)
     {
-      // Todo dispose MongoClient
       throw new NotImplementedException();
     }
 

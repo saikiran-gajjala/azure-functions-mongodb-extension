@@ -10,10 +10,27 @@ namespace Azure.Functions.Extension.MongoDB
     public MongoDBTriggerAttribute(string connectionString,
                                    string database,
                                    string collection,
+                                   string pipelineMatchStage)
+    {
+      this.ConnectionString = connectionString;
+      this.Database = database;
+      this.Collection = collection;
+      this.WatchInserts = false;
+      this.WatchUpdates = false;
+      this.WatchDeletes = false;
+      this.WatchReplaces = false;
+      this.WatchFields = null;
+      this.PipelineMatchStage = pipelineMatchStage;
+    }
+
+    public MongoDBTriggerAttribute(string connectionString,
+                                   string database,
+                                   string collection,
                                    bool watchInserts = true,
                                    bool watchUpdates = true,
                                    bool watchDeletes = true,
-                                   bool watchReplaces = true)
+                                   bool watchReplaces = true,
+                                   string watchFields = null)
     {
       this.ConnectionString = connectionString;
       this.Database = database;
@@ -22,6 +39,29 @@ namespace Azure.Functions.Extension.MongoDB
       this.WatchUpdates = watchUpdates;
       this.WatchDeletes = watchDeletes;
       this.WatchReplaces = watchReplaces;
+      this.WatchFields = watchFields;
+      this.PipelineMatchStage = null;
+    }
+
+    public MongoDBTriggerAttribute(string connectionString,
+                                   string database,
+                                   string collection,
+                                   bool watchInserts = true,
+                                   bool watchUpdates = true,
+                                   bool watchDeletes = true,
+                                   bool watchReplaces = true,
+                                   string watchFields = null,
+                                   string pipelineMatchStage = null)
+    {
+      this.ConnectionString = connectionString;
+      this.Database = database;
+      this.Collection = collection;
+      this.WatchInserts = watchInserts;
+      this.WatchUpdates = watchUpdates;
+      this.WatchDeletes = watchDeletes;
+      this.WatchReplaces = watchReplaces;
+      this.WatchFields = watchFields;
+      this.PipelineMatchStage = pipelineMatchStage;
     }
 
     public string ConnectionString { get; set; }
@@ -30,16 +70,17 @@ namespace Azure.Functions.Extension.MongoDB
 
     public string Collection { get; set; }
 
-    public bool WatchInserts { get; set; }
+    public bool WatchInserts { get; private set; }
 
-    public bool WatchUpdates { get; set; }
+    public bool WatchUpdates { get; private set; }
 
-    public bool WatchDeletes { get; set; }
+    public bool WatchDeletes { get; private set; }
 
-    public bool WatchReplaces { get; set; }
+    public bool WatchReplaces { get; private set; }
 
-    // Todo:
-    public string Filter { get; set; }
+    public string WatchFields { get; set; }
+
+    public string PipelineMatchStage { get; set; }
   }
 }
 

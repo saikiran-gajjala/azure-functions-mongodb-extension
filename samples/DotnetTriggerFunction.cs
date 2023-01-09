@@ -20,10 +20,11 @@ namespace Trigger.Samples
         [MongoDBTrigger("%mongodb_connection_string%",
                         "%database%",
                         "%collection%",
-                        watchInserts: true,
-                        watchUpdates: false,
-                        watchDeletes : true,
-                        watchReplaces: true)] MongoDBTriggerResponseData responseData,
+                        watchInserts: false,
+                        watchUpdates: true,
+                        watchDeletes : false,
+                        watchReplaces: false,
+                        watchFields: "total" )] MongoDBTriggerResponseData responseData,
         ILogger log)
     {
       log.LogInformation($"Change document obtained. Reponse: {JsonConvert.SerializeObject(responseData)}");
