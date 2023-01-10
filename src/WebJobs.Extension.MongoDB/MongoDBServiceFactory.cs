@@ -3,6 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Implementation class for <see cref="IMongoDBServiceFactory"/> interface.
+  /// </summary>
   public class MongoDBServiceFactory : IMongoDBServiceFactory
   {
     private readonly ILogger logger;
@@ -11,6 +14,9 @@ namespace Azure.Functions.Extension.MongoDB
       this.logger = loggerFactory.CreateLogger(LogCategories.CreateTriggerCategory("MongoDB"));
     }
 
+    /// <summary>
+    /// Create MongoDB Client Wrapper instance from connection string
+    /// </summary>
     public MongoDBClientWrapper CreateMongoDBClient(string connectionString)
     {
       return new MongoDBClientWrapper(connectionString, this.logger);

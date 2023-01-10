@@ -6,6 +6,9 @@ using Microsoft.Extensions.Options;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// MongoDb Extension Config Provider class that implements <see cref="IExtensionConfigProvider"/> interface.
+  /// </summary>
   public class MongoDBExtensionConfigProvider : IExtensionConfigProvider
   {
     private readonly IConfiguration config;

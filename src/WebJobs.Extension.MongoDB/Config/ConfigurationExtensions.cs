@@ -4,18 +4,21 @@ using Microsoft.Extensions.Configuration;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Extension Methods for IConfiguration
+  /// </summary>
   internal static class ConfigurationExtensions
   {
-    internal static string ResolveSecureSetting(this IConfiguration config, INameResolver nameResolver, string currentValue)
+    internal static string ResolveConfigurationSetting(this IConfiguration configuration, INameResolver nameResolver, string currentValue)
     {
       if (string.IsNullOrWhiteSpace(currentValue))
       {
         return currentValue;
       }
 
-      var resolved = nameResolver.ResolveWholeString(currentValue);
-      var resolvedFromConfig = config.GetConnectionStringOrSetting(resolved);
-      return !string.IsNullOrEmpty(resolvedFromConfig) ? resolvedFromConfig : resolved;
+      var resolvedValue = nameResolver.ResolveWholeString(currentValue);
+      var resolvedFromConfig = configuration.GetConnectionStringOrSetting(resolvedValue);
+      return !string.IsNullOrEmpty(resolvedFromConfig) ? resolvedFromConfig : resolvedValue;
     }
   }
 }

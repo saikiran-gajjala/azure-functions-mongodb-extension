@@ -5,6 +5,9 @@ using Microsoft.Azure.WebJobs.Host.Bindings;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Value Binder class
+  /// </summary>
   public class MongoDbValueBinder : IValueBinder
   {
     private object value;
@@ -14,7 +17,7 @@ namespace Azure.Functions.Extension.MongoDB
       this.value = value;
     }
 
-    public Type Type => typeof(MongoDBTriggerResponseData);
+    public Type Type => typeof(MongoDBTriggerEventData);
 
     public Task<object> GetValueAsync()
     {

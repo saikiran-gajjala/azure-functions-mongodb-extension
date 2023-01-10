@@ -7,6 +7,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// MongoDBTriggerBindingProvider class is an implementation of ITriggerBindingProvider that will be called when functions are being discovered.
+  /// </summary>
   public class MongoDBTriggerBindingProvider : ITriggerBindingProvider
   {
     private readonly IConfiguration config;
@@ -19,6 +22,9 @@ namespace Azure.Functions.Extension.MongoDB
       this.nameResolver = nameResolver;
     }
 
+    /// <summary>
+    /// Creates TriggerBinding and fetches the configuration settings for the MongoDb attribute using named resolvers.
+    /// </summary>
     public Task<ITriggerBinding> TryCreateAsync(TriggerBindingProviderContext context)
     {
       var parameter = context.Parameter;
@@ -31,7 +37,7 @@ namespace Azure.Functions.Extension.MongoDB
 
       attribute = CreateMongoDBConfiguration(attribute);
 
-      if (parameter.ParameterType != typeof(MongoDBTriggerResponseData))
+      if (parameter.ParameterType != typeof(MongoDBTriggerEventData))
       {
         throw new InvalidOperationException("Invalid parameter type. Use the type MongoDBTriggerResponseData for the trigger.");
       }
@@ -43,11 +49,11 @@ namespace Azure.Functions.Extension.MongoDB
 
     private MongoDBTriggerAttribute CreateMongoDBConfiguration(MongoDBTriggerAttribute attribute)
     {
-      attribute.ConnectionString = this.config.ResolveSecureSetting(nameResolver, attribute.ConnectionString);
-      attribute.Database = this.config.ResolveSecureSetting(nameResolver, attribute.Database);
-      attribute.Collection = this.config.ResolveSecureSetting(nameResolver, attribute.Collection);
-      attribute.WatchFields = this.config.ResolveSecureSetting(nameResolver, attribute.WatchFields);
-      attribute.PipelineMatchStage = this.config.ResolveSecureSetting(nameResolver, attribute.PipelineMatchStage);
+      attribute.ConnectionString = this.config.ResolveConfigurationSetting(nameResolver, attribute.ConnectionString);
+      attribute.Database = this.config.ResolveConfigurationSetting(nameResolver, attribute.Database);
+      attribute.Collection = this.config.ResolveConfigurationSetting(nameResolver, attribute.Collection);
+      attribute.WatchFields = this.config.ResolveConfigurationSetting(nameResolver, attribute.WatchFields);
+      attribute.PipelineMatchStage = this.config.ResolveConfigurationSetting(nameResolver, attribute.PipelineMatchStage);
       return attribute;
     }
   }

@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
@@ -6,11 +5,14 @@ using Microsoft.Azure.WebJobs.Host.Listeners;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Listener class that interacts with MongoDB and subscribes to changes to the registered documents.
+  /// </summary>
   public class MongoDBChangeStreamListener : IListener
   {
     private readonly ITriggeredFunctionExecutor executor;
     private readonly MongoDBTriggerContext context;
-    private CancellationTokenSource cancellationTokenSource;
+    private readonly CancellationTokenSource cancellationTokenSource;
 
     public MongoDBChangeStreamListener(ITriggeredFunctionExecutor executor, MongoDBTriggerContext context)
     {
@@ -19,12 +21,12 @@ namespace Azure.Functions.Extension.MongoDB
       this.cancellationTokenSource = new CancellationTokenSource();
     }
 
-    public void Cancel() { }
-
-    public void Dispose() { }
-
+    /// <summary>
+    /// During startup azure Function invokes to start the MongoDB listener in a background thread
+    /// </summary>
     public Task StartAsync(CancellationToken cancellationToken)
     {
+      // Using a thread instead of a task beacuse this will be long running
       var thread = new Thread(Watch)
       {
         IsBackground = true,
@@ -34,7 +36,17 @@ namespace Azure.Functions.Extension.MongoDB
       return Task.CompletedTask;
     }
 
-    public void Watch(object parameter)
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+      // Nothing to clean up or dispose.
+      return Task.CompletedTask;
+    }
+
+    public void Cancel() { }
+
+    public void Dispose() { }
+
+    private void Watch(object parameter)
     {
       var cancellationToken = (CancellationToken)parameter;
       this.context.MongoClient.Watch(
@@ -42,12 +54,8 @@ namespace Azure.Functions.Extension.MongoDB
                                  ExecuteAsync,
                                  cancellationToken);
     }
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-      throw new NotImplementedException();
-    }
 
-    private void ExecuteAsync(MongoDBTriggerResponseData response)
+    private void ExecuteAsync(MongoDBTriggerEventData response)
     {
       var triggerData = new TriggeredFunctionData
       {

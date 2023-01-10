@@ -4,7 +4,10 @@ using MongoDB.Driver;
 
 namespace Azure.Functions.Extension.MongoDB
 {
-  public class MongoDBTriggerResponseData
+  /// <summary>
+  /// MongoDB Trigger event data model. 
+  /// </summary>
+  public class MongoDBTriggerEventData
   {
     //
     // Summary:
@@ -34,6 +37,7 @@ namespace Azure.Functions.Extension.MongoDB
     // Value:
     //     The UUID of the collection.
     public Guid? CollectionUuid { get; internal set; }
+
     //
     // Summary:
     //     Gets the database namespace.
@@ -49,6 +53,7 @@ namespace Azure.Functions.Extension.MongoDB
     // Value:
     //     The document key.
     public BsonDocument DocumentKey { get; internal set; }
+
     //
     // Summary:
     //     Gets the full document.
@@ -56,6 +61,7 @@ namespace Azure.Functions.Extension.MongoDB
     // Value:
     //     The full document.
     public BsonDocument FullDocument { get; internal set; }
+
     //
     // Summary:
     //     Gets the full document before change.
@@ -79,6 +85,7 @@ namespace Azure.Functions.Extension.MongoDB
     // Value:
     //     The resume token.
     public BsonDocument ResumeToken { get; internal set; }
+
     //
     // Summary:
     //     Gets the update description.
@@ -86,6 +93,7 @@ namespace Azure.Functions.Extension.MongoDB
     // Value:
     //     The update description.
     public ChangeStreamUpdateDescription UpdateDescription { get; internal set; }
+
     //
     // Summary:
     //     Gets the wall time of the change stream event.

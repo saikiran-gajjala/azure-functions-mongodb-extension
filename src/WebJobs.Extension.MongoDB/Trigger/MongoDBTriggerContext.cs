@@ -1,8 +1,10 @@
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Context class for MongoDB trigger
+  /// </summary>
   public class MongoDBTriggerContext
   {
-
     public MongoDBTriggerContext(MongoDBTriggerAttribute triggerAttribute, MongoDBClientWrapper mongoClient)
     {
       this.TriggerAttribute = triggerAttribute;

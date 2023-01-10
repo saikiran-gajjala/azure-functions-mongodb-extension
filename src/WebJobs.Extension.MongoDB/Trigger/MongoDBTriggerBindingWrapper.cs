@@ -8,6 +8,9 @@ using Microsoft.Azure.WebJobs.Host.Triggers;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// Creates an instance of <see cref="MongoDBChangeStreamListener"/> and binds the trigger data.
+  /// </summary>
   public class MongoDBTriggerBindingWrapper : ITriggerBinding
   {
     private readonly MongoDBTriggerContext triggerContext;
@@ -17,10 +20,26 @@ namespace Azure.Functions.Extension.MongoDB
       this.triggerContext = triggerContext;
     }
 
-    public Type TriggerValueType => typeof(MongoDBTriggerResponseData);
+    /// <summary>
+    /// MongoDB trigger event data type i.e <see cref="MongoDBTriggerEventData"/>
+    /// </summary>
+    public Type TriggerValueType => typeof(MongoDBTriggerEventData);
 
     public IReadOnlyDictionary<string, Type> BindingDataContract => new Dictionary<string, Type>();
 
+    /// <summary>
+    /// Azure function creates the instance of <see cref="MongoDBChangeStreamListener"/> class 
+    /// </summary>
+    public Task<IListener> CreateListenerAsync(ListenerFactoryContext context)
+    {
+      var executor = context.Executor;
+      var listener = new MongoDBChangeStreamListener(executor, triggerContext);
+      return Task.FromResult<IListener>(listener);
+    }
+
+    /// <summary>
+    /// Azure function binds a value using the binding context
+    /// </summary>
     public Task<ITriggerData> BindAsync(object value, ValueBindingContext context)
     {
       var valueBinder = new MongoDbValueBinder(value);
@@ -30,14 +49,9 @@ namespace Azure.Functions.Extension.MongoDB
       return Task.FromResult<ITriggerData>(triggerData);
     }
 
-    public Task<IListener> CreateListenerAsync(ListenerFactoryContext context)
-    {
-      var executor = context.Executor;
-      var listener = new MongoDBChangeStreamListener(executor, triggerContext);
-
-      return Task.FromResult<IListener>(listener);
-    }
-
+    /// <summary>
+    /// Azure function fetches the description of the binding.
+    /// </summary>
     public ParameterDescriptor ToParameterDescriptor()
     {
       return new TriggerParameterDescriptor

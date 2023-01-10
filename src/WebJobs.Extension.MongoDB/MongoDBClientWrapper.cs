@@ -9,6 +9,9 @@ using MongoDB.Driver;
 
 namespace Azure.Functions.Extension.MongoDB
 {
+  /// <summary>
+  /// MongoDB client wrapper class that interacts with MongoDB using MongoDB driver.
+  /// </summary>
   public class MongoDBClientWrapper
   {
     private readonly IMongoClient mongoClient;
@@ -28,8 +31,11 @@ namespace Azure.Functions.Extension.MongoDB
       }
     }
 
+    /// <summary>
+    /// Initiates the MongoDB Change Stream on the target collection(s)
+    /// </summary>
     public void Watch(MongoDBTriggerAttribute attribute,
-                      Action<MongoDBTriggerResponseData> callback,
+                      Action<MongoDBTriggerEventData> callback,
                       CancellationToken cancellationToken)
     {
 
@@ -46,7 +52,7 @@ namespace Azure.Functions.Extension.MongoDB
     }
 
     private void WatchWithInputMatchStage(MongoDBTriggerAttribute attribute,
-                                          Action<MongoDBTriggerResponseData> callback,
+                                          Action<MongoDBTriggerEventData> callback,
                                           ChangeStreamOptions options,
                                           BsonDocument changeStreamPipelineMatchStage,
                                           CancellationToken cancellationToken)
@@ -65,7 +71,7 @@ namespace Azure.Functions.Extension.MongoDB
     }
 
     private void WatchWithBasicMatchStage(MongoDBTriggerAttribute attribute,
-                                          Action<MongoDBTriggerResponseData> callback,
+                                          Action<MongoDBTriggerEventData> callback,
                                           ChangeStreamOptions options,
                                           CancellationToken cancellationToken)
     {
@@ -96,7 +102,7 @@ namespace Azure.Functions.Extension.MongoDB
     }
 
     private void StartChangeStream(MongoDBTriggerAttribute attribute,
-                       Action<MongoDBTriggerResponseData> callback,
+                       Action<MongoDBTriggerEventData> callback,
                        PipelineDefinition<ChangeStreamDocument<BsonDocument>, ChangeStreamDocument<BsonDocument>> pipeline,
                        ChangeStreamOptions options,
                        CancellationToken cancellationToken)
@@ -125,19 +131,19 @@ namespace Azure.Functions.Extension.MongoDB
         // Watches all collections in all databases
         using (var cursor = this.mongoClient.Watch(pipeline, options, cancellationToken))
         {
-          this.IterateCursor(callback, (IChangeStreamCursor<ChangeStreamDocument<BsonDocument>>)cursor);
+          this.IterateCursor(callback, cursor);
         }
       }
     }
 
-    private void IterateCursor(Action<MongoDBTriggerResponseData> callback,
+    private void IterateCursor(Action<MongoDBTriggerEventData> callback,
                                IChangeStreamCursor<ChangeStreamDocument<BsonDocument>> cursor)
     {
       var enumerator = cursor.ToEnumerable().GetEnumerator();
       while (enumerator.MoveNext())
       {
         ChangeStreamDocument<BsonDocument> change = enumerator.Current;
-        var responseData = new MongoDBTriggerResponseData()
+        var responseData = new MongoDBTriggerEventData()
         {
           CollectionNamespace = change.CollectionNamespace,
           DatabaseNamespace = change.DatabaseNamespace,
