@@ -2,7 +2,7 @@
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Configuration;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Extension Methods for IConfiguration

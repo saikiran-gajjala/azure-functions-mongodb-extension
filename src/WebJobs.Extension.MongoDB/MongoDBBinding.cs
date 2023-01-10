@@ -1,9 +1,9 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Hosting;
 
-[assembly: WebJobsStartup(typeof(Azure.Functions.Extension.MongoDB.MongoDBWebJobStartup))]
+[assembly: WebJobsStartup(typeof(Peerislands.Azure.Functions.Extension.MongoDB.MongoDBWebJobStartup))]
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Azure Function start up implementation class

@@ -2,7 +2,7 @@ using System;
 using Microsoft.Azure.WebJobs.Description;
 using MongoDB.Driver;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDB Trigger Attribute Class to decorate paramaters for the function run method.

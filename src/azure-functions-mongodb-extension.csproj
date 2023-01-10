@@ -2,7 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>WebJobs.Extension.MongoDB</RootNamespace>
+    <RootNamespace>Peerislands.Azure.Functions.Extension.MongoDB</RootNamespace>
+    <PackageId>Peerislands.Azure.Functions.Extension.MongoDB</PackageId>
+    <AssemblyName>Peerislands.Azure.Functions.Extension.MongoDB</AssemblyName>
+    <Description>Peerislands Azure WebJobs SDK MongoDB Extension.</Description>
+    <Version>1.0.2</Version>
+    <Authors>Sai Kiran Gajjala</Authors>
+    <Company>Peerislands.io</Company>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs.Logging;
 using Microsoft.Extensions.Logging;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Implementation class for <see cref="IMongoDBServiceFactory"/> interface.

@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Azure.Functions.Extension.MongoDB;
+using Peerislands.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
 {
@@ -10,12 +10,12 @@ namespace Trigger.Samples
     [FunctionName("Dotnet-Trigger-Advanced-Function")]
     public static void Run(
     [MongoDBTrigger("%mongodb_connection_string%",
-                    "%database%",
-                    "%collection%",
-                    "%pipelineMatchStage%")] MongoDBTriggerEventData eventData,
+                   "%database%",
+                   "%collection%",
+                   "%pipelineMatchStage%")] string eventData,
     ILogger log)
     {
-      log.LogInformation($"Change document obtained. Reponse: {JsonConvert.SerializeObject(eventData)}");
+      log.LogInformation($"Change document obtained. Reponse: {eventData}");
     }
   }
 }

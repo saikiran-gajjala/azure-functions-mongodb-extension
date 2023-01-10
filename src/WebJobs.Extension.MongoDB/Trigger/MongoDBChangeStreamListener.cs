@@ -2,8 +2,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
+using Newtonsoft.Json;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Listener class that interacts with MongoDB and subscribes to changes to the registered documents.
@@ -57,9 +58,10 @@ namespace Azure.Functions.Extension.MongoDB
 
     private void ExecuteAsync(MongoDBTriggerEventData response)
     {
+      var responseJson = JsonConvert.SerializeObject(response);
       var triggerData = new TriggeredFunctionData
       {
-        TriggerValue = response
+        TriggerValue = responseJson
       };
 
       var task = this.executor.TryExecuteAsync(triggerData, CancellationToken.None);

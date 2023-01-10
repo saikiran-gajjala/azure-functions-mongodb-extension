@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs.Host.Listeners;
 using Microsoft.Azure.WebJobs.Host.Protocols;
 using Microsoft.Azure.WebJobs.Host.Triggers;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Creates an instance of <see cref="MongoDBChangeStreamListener"/> and binds the trigger data.
@@ -21,9 +21,9 @@ namespace Azure.Functions.Extension.MongoDB
     }
 
     /// <summary>
-    /// MongoDB trigger event data type i.e <see cref="MongoDBTriggerEventData"/>
+    /// MongoDB trigger event data type string 
     /// </summary>
-    public Type TriggerValueType => typeof(MongoDBTriggerEventData);
+    public Type TriggerValueType => typeof(string);
 
     public IReadOnlyDictionary<string, Type> BindingDataContract => new Dictionary<string, Type>();
 

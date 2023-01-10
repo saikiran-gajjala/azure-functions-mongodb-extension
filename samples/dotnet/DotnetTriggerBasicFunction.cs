@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Azure.Functions.Extension.MongoDB;
+using Peerislands.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
 {
@@ -16,10 +16,10 @@ namespace Trigger.Samples
                     watchUpdates: true,
                     watchDeletes : false,
                     watchReplaces: false,
-                    watchFields: "total" )] MongoDBTriggerEventData eventData,
+                    watchFields: "total" )] string eventData,
     ILogger log)
     {
-      log.LogInformation($"Change document obtained. Reponse: {JsonConvert.SerializeObject(eventData)}");
+      log.LogInformation($"Change document obtained. Reponse: {eventData}");
     }
   }
 }

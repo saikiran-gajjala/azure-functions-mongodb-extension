@@ -2,7 +2,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDB Trigger event data model. 

@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host.Triggers;
 using Microsoft.Extensions.Configuration;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDBTriggerBindingProvider class is an implementation of ITriggerBindingProvider that will be called when functions are being discovered.
@@ -37,9 +37,9 @@ namespace Azure.Functions.Extension.MongoDB
 
       attribute = CreateMongoDBConfiguration(attribute);
 
-      if (parameter.ParameterType != typeof(MongoDBTriggerEventData))
+      if (parameter.ParameterType != typeof(string))
       {
-        throw new InvalidOperationException("Invalid parameter type. Use the type MongoDBTriggerResponseData for the trigger.");
+        throw new InvalidOperationException("Invalid parameter type. Use the string type for the trigger.");
       }
 
       var triggerBinding = new MongoDBTriggerBindingWrapper(configProvider.CreateContext(attribute));

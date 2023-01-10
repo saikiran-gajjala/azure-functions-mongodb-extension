@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Value Binder class
@@ -17,7 +17,7 @@ namespace Azure.Functions.Extension.MongoDB
       this.value = value;
     }
 
-    public Type Type => typeof(MongoDBTriggerEventData);
+    public Type Type => typeof(string);
 
     public Task<object> GetValueAsync()
     {

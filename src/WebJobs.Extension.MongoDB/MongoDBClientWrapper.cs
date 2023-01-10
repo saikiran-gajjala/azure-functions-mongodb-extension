@@ -7,7 +7,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
-namespace Azure.Functions.Extension.MongoDB
+namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDB client wrapper class that interacts with MongoDB using MongoDB driver.
@@ -27,7 +27,7 @@ namespace Azure.Functions.Extension.MongoDB
       }
       catch (MongoException)
       {
-        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from the azure frunction.");
+        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from the azure function.");
       }
     }
 

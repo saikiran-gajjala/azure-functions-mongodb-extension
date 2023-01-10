@@ -5,7 +5,7 @@ VisualStudioVersion = 25.0.1704.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azure-functions-mongodb-extension", "src\azure-functions-mongodb-extension.csproj", "{68FC765C-9F2F-4075-941A-8E6C02D57654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.sample", "samples\dotnet.sample.csproj", "{267C2241-D8B4-4899-94CF-732A72447E9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.sample", "samples\dotnet\dotnet.sample.csproj", "{267C2241-D8B4-4899-94CF-732A72447E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
