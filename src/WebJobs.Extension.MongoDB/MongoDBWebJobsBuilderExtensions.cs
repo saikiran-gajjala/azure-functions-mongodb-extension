@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
-  /// Class with extention methods for <see cref="IWebJobsBuilder"/>
+  /// Class with extention methods for <see cref="IWebJobsBuilder"/> interface.
   /// </summary>
   public static class MongoDBWebJobsBuilderExtensions
   {
@@ -16,11 +16,9 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
         throw new ArgumentNullException(nameof(builder));
       }
 
-
       builder.AddExtension<MongoDBExtensionConfigProvider>();
       builder.Services.AddSingleton<IMongoDBServiceFactory, MongoDBServiceFactory>();
       return builder;
     }
   }
 }
-

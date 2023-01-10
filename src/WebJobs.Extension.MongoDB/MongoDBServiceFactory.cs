@@ -23,4 +23,3 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     }
   }
 }
-

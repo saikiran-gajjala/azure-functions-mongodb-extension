@@ -35,27 +35,26 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
         return Task.FromResult<ITriggerBinding>(null);
       }
 
-      attribute = CreateMongoDBConfiguration(attribute);
+      attribute = this.CreateMongoDBConfiguration(attribute);
 
       if (parameter.ParameterType != typeof(string))
       {
         throw new InvalidOperationException("Invalid parameter type. Use the string type for the trigger.");
       }
 
-      var triggerBinding = new MongoDBTriggerBindingWrapper(configProvider.CreateContext(attribute));
+      var triggerBinding = new MongoDBTriggerBindingWrapper(this.configProvider.CreateContext(attribute));
 
       return Task.FromResult<ITriggerBinding>(triggerBinding);
     }
 
     private MongoDBTriggerAttribute CreateMongoDBConfiguration(MongoDBTriggerAttribute attribute)
     {
-      attribute.ConnectionString = this.config.ResolveConfigurationSetting(nameResolver, attribute.ConnectionString);
-      attribute.Database = this.config.ResolveConfigurationSetting(nameResolver, attribute.Database);
-      attribute.Collection = this.config.ResolveConfigurationSetting(nameResolver, attribute.Collection);
-      attribute.WatchFields = this.config.ResolveConfigurationSetting(nameResolver, attribute.WatchFields);
-      attribute.PipelineMatchStage = this.config.ResolveConfigurationSetting(nameResolver, attribute.PipelineMatchStage);
+      attribute.ConnectionString = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.ConnectionString);
+      attribute.Database = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.Database);
+      attribute.Collection = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.Collection);
+      attribute.WatchFields = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.WatchFields);
+      attribute.PipelineMatchStage = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.PipelineMatchStage);
       return attribute;
     }
   }
 }
-

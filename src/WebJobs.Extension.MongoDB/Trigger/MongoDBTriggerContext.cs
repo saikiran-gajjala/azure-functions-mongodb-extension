@@ -1,7 +1,7 @@
 namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
-  /// Context class for MongoDB trigger
+  /// Context class for MongoDB trigger.
   /// </summary>
   public class MongoDBTriggerContext
   {
@@ -12,7 +12,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     }
 
     public MongoDBTriggerAttribute TriggerAttribute { get; private set; }
+
     public MongoDBClientWrapper MongoClient { get; private set; }
   }
 }
-

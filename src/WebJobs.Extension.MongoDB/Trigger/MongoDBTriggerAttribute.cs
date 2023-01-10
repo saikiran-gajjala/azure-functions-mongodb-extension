@@ -12,7 +12,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
   public class MongoDBTriggerAttribute : Attribute
   {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribue class.
+    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribute class.
     /// </summary>
     /// <param name="connectionString">Connection String of the MongoDB replica-set</param>
     /// <param name="database">Name of the database to watch</param>
@@ -38,7 +38,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribue class.
+    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribute class.
     /// </summary>
     /// <param name="connectionString">Connection String of the MongoDB replica-set</param>
     /// <param name="database">Name of the database to watch</param>
@@ -72,7 +72,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribue class.
+    /// Initializes a new instance of the <see cref="MongoDBTriggerAttribute"/> attribute class.
     /// </summary>
     /// <param name="connectionString">Connection String of the MongoDB replica-set</param>
     /// <param name="database">Name of the database to watch</param>
@@ -129,4 +129,3 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     public string PipelineMatchStage { get; set; }
   }
 }
-

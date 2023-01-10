@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
-  /// Configuration for MongoDb Azure Function extension
+  /// Configuration for MongoDb Azure Function extension.
   /// </summary>
   public class MongoDBOptions : IOptionsFormatter
   {
-
     public string ConnectionString { get; set; }
 
     public string Database { get; set; }

@@ -32,7 +32,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
 
     public void Initialize(ExtensionConfigContext context)
     {
-      this.configuration.ConfigurationSection.Bind(options);
+      this.configuration.ConfigurationSection.Bind(this.options);
 
       var triggerBindingProvider = new MongoDBTriggerBindingProvider(this, this.config, this.nameResolver);
       context.AddBindingRule<MongoDBTriggerAttribute>()
@@ -41,7 +41,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
 
     public MongoDBTriggerContext CreateContext(MongoDBTriggerAttribute attribute)
     {
-      return new MongoDBTriggerContext(attribute, mongoDBServiceFactory.CreateMongoDBClient(attribute.ConnectionString));
+      return new MongoDBTriggerContext(attribute, this.mongoDBServiceFactory.CreateMongoDBClient(attribute.ConnectionString));
     }
   }
 }

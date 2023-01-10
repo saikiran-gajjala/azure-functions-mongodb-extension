@@ -28,12 +28,12 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     public IReadOnlyDictionary<string, Type> BindingDataContract => new Dictionary<string, Type>();
 
     /// <summary>
-    /// Azure function creates the instance of <see cref="MongoDBChangeStreamListener"/> class 
+    /// Azure function creates the instance of <see cref="MongoDBChangeStreamListener"/> class.
     /// </summary>
     public Task<IListener> CreateListenerAsync(ListenerFactoryContext context)
     {
       var executor = context.Executor;
-      var listener = new MongoDBChangeStreamListener(executor, triggerContext);
+      var listener = new MongoDBChangeStreamListener(executor, this.triggerContext);
       return Task.FromResult<IListener>(listener);
     }
 
@@ -60,10 +60,9 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
         DisplayHints = new ParameterDisplayHints
         {
           Prompt = "MongoDB",
-          Description = "MongoDB Document trigger"
-        }
+          Description = "MongoDB Document trigger",
+        },
       };
     }
   }
 }
-

@@ -5,7 +5,7 @@ using MongoDB.Driver;
 namespace Peerislands.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
-  /// MongoDB Trigger event data model. 
+  /// MongoDB Trigger event data model.
   /// </summary>
   public class MongoDBTriggerEventData
   {

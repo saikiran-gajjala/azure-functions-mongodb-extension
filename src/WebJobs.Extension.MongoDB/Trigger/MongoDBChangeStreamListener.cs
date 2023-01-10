@@ -28,12 +28,12 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     public Task StartAsync(CancellationToken cancellationToken)
     {
       // Using a thread instead of a task beacuse this will be long running
-      var thread = new Thread(Watch)
+      var thread = new Thread(this.Watch)
       {
         IsBackground = true,
       };
 
-      thread.Start(cancellationTokenSource.Token);
+      thread.Start(this.cancellationTokenSource.Token);
       return Task.CompletedTask;
     }
 
@@ -61,7 +61,7 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
       var responseJson = JsonConvert.SerializeObject(response);
       var triggerData = new TriggeredFunctionData
       {
-        TriggerValue = responseJson
+        TriggerValue = responseJson,
       };
 
       var task = this.executor.TryExecuteAsync(triggerData, CancellationToken.None);
@@ -69,4 +69,3 @@ namespace Peerislands.Azure.Functions.Extension.MongoDB
     }
   }
 }
-
