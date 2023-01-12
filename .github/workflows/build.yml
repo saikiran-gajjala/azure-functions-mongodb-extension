@@ -12,15 +12,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    # Install the .NET Core workload
-    - name: Install .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Install dependencies
+    - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
