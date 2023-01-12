@@ -1,6 +1,7 @@
 using System;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 
 namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
@@ -36,6 +37,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The UUID of the collection.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public Guid? CollectionUuid { get; internal set; }
 
     //
@@ -68,6 +70,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The full document before change.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public BsonDocument FullDocumentBeforeChange { get; internal set; }
 
     //
@@ -76,6 +79,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The type of the operation.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public ChangeStreamOperationType OperationType { get; internal set; }
 
     //
@@ -84,6 +88,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The resume token.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public BsonDocument ResumeToken { get; internal set; }
 
     //
@@ -92,6 +97,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The update description.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public ChangeStreamUpdateDescription UpdateDescription { get; internal set; }
 
     //
@@ -100,6 +106,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     //
     // Value:
     //     The wall time.
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public DateTime? WallTime { get; internal set; }
   }
 }

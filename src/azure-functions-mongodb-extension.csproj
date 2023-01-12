@@ -6,7 +6,7 @@
     <PackageId>Hackathon.Azure.Functions.Extension.MongoDB</PackageId>
     <AssemblyName>Hackathon.Azure.Functions.Extension.MongoDB</AssemblyName>
     <Description>Azure WebJobs SDK MongoDB Extension.</Description>
-    <Version>1.0.2</Version>
+    <Version>1.0.4</Version>
     <Authors>Sai Kiran Gajjala</Authors>
     <Company>Hackathon</Company>
     <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
@@ -14,16 +14,16 @@
 
   <ItemGroup>
     <None Remove="Microsoft.Azure.WebJobs.Extensions" />
-    <None Remove="WebJobs.Extension.MongoDB\" />
     <None Remove="MongoDB.Driver" />
-    <None Remove="WebJobs.Extension.MongoDB\Trigger\" />
+    <None Remove="Trigger\" />
+    <None Remove="MongoDBClients\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions" Version="4.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="WebJobs.Extension.MongoDB\" />
-    <Folder Include="WebJobs.Extension.MongoDB\Trigger\" />
+    <Folder Include="Trigger\" />
+    <Folder Include="MongoDBClients\" />
   </ItemGroup>
 </Project>

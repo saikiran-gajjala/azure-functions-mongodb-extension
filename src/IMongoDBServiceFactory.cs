@@ -8,7 +8,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     /// <summary>
     /// Create MongoDB Client Wrapper instance from connection string
     /// </summary>
-    public MongoDBClientWrapper CreateMongoDBClient(string connectionString);
+    public BaseClientWrapper CreateMongoDBClient(string connectionString, bool isCosmosDB);
   }
 }
 

@@ -5,6 +5,7 @@
             "connectionString": "%mongodb_connection_string%",
             "database": "%database%",
             "collection": "%collection%",
+            "isCosmosDB": true,
             "watchInserts": false,
             "watchUpdates": true,
             "watchDeletes": false,

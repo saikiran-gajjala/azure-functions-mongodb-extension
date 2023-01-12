@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "azure-functions-mongodb-ext
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.sample", "samples\dotnet\dotnet.sample.csproj", "{267C2241-D8B4-4899-94CF-732A72447E9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "extensions", "samples\javascript\extensions.csproj", "{F1CC410A-4577-4667-AC3D-852FEA8A2236}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,14 @@ Global
 		{267C2241-D8B4-4899-94CF-732A72447E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{267C2241-D8B4-4899-94CF-732A72447E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{267C2241-D8B4-4899-94CF-732A72447E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B33FD45-763E-419C-8CA2-7C05F3B4AF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B33FD45-763E-419C-8CA2-7C05F3B4AF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B33FD45-763E-419C-8CA2-7C05F3B4AF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B33FD45-763E-419C-8CA2-7C05F3B4AF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CC410A-4577-4667-AC3D-852FEA8A2236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CC410A-4577-4667-AC3D-852FEA8A2236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CC410A-4577-4667-AC3D-852FEA8A2236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CC410A-4577-4667-AC3D-852FEA8A2236}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

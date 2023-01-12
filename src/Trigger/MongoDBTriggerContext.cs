@@ -5,7 +5,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
   /// </summary>
   public class MongoDBTriggerContext
   {
-    public MongoDBTriggerContext(MongoDBTriggerAttribute triggerAttribute, MongoDBClientWrapper mongoClient)
+    public MongoDBTriggerContext(MongoDBTriggerAttribute triggerAttribute, BaseClientWrapper mongoClient)
     {
       this.TriggerAttribute = triggerAttribute;
       this.MongoClient = mongoClient;
@@ -13,6 +13,6 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
 
     public MongoDBTriggerAttribute TriggerAttribute { get; private set; }
 
-    public MongoDBClientWrapper MongoClient { get; private set; }
+    public BaseClientWrapper MongoClient { get; private set; }
   }
 }

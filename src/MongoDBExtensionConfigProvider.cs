@@ -41,7 +41,7 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
 
     public MongoDBTriggerContext CreateContext(MongoDBTriggerAttribute attribute)
     {
-      return new MongoDBTriggerContext(attribute, this.mongoDBServiceFactory.CreateMongoDBClient(attribute.ConnectionString));
+      return new MongoDBTriggerContext(attribute, this.mongoDBServiceFactory.CreateMongoDBClient(attribute.ConnectionString, attribute.IsCosmosDB));
     }
   }
 }

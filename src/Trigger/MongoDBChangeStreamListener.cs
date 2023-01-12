@@ -56,12 +56,11 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
                                  cancellationToken);
     }
 
-    private void ExecuteAsync(MongoDBTriggerEventData response)
+    private void ExecuteAsync(string response)
     {
-      var responseJson = JsonConvert.SerializeObject(response);
       var triggerData = new TriggeredFunctionData
       {
-        TriggerValue = responseJson,
+        TriggerValue = response,
       };
 
       var task = this.executor.TryExecuteAsync(triggerData, CancellationToken.None);

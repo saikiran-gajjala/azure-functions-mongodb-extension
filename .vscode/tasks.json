@@ -6,9 +6,9 @@
 			"label": "func: host start",
 			"command": "host start",
 			"problemMatcher": "$func-node-watch",
-			"isBackground": true,
+			"isBackground": false,
 			"options": {
-				"cwd": "${workspaceFolder}/samples/bin/Debug/net6.0"
+				"cwd": "${workspaceFolder}/samples/dotnet/bin/Debug/net6.0"
 			}
 		}
 	]

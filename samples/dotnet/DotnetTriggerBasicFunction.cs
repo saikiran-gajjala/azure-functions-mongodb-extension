@@ -12,6 +12,7 @@ namespace Trigger.Samples
     [MongoDBTrigger("%mongodb_connection_string%",
                     "%database%",
                     "%collection%",
+                    false,
                     watchInserts: false,
                     watchUpdates: true,
                     watchDeletes : false,
@@ -23,4 +24,3 @@ namespace Trigger.Samples
     }
   }
 }
-

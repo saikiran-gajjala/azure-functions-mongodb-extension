@@ -1,41 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Misc;
+using Newtonsoft.Json;
 
 namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
-  /// MongoDB client wrapper class that interacts with MongoDB using MongoDB driver.
+  /// CosmosDB's MongoDB API client wrapper class that interacts with MongoDB using MongoDB driver.
   /// </summary>
-  public class MongoDBClientWrapper
+  public class CosmosDBClientWrapper : BaseClientWrapper
   {
-    private readonly IMongoClient mongoClient;
-    private readonly ILogger logger;
-
-    public MongoDBClientWrapper(string connectionString, ILogger logger)
+    public CosmosDBClientWrapper(string connectionString, ILogger logger) : base(connectionString, logger)
     {
-      this.logger = logger;
-      this.mongoClient = new MongoClient(connectionString);
-      try
-      {
-        var databaseName = this.mongoClient.ListDatabaseNames(); // Connectivity check
-      }
-      catch (MongoException)
-      {
-        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from the azure function.");
-      }
     }
 
     /// <summary>
     /// Initiates the MongoDB Change Stream on the target collection(s)
+    /// Note: CosmosDB has limitation with change stream with operationType & updateDescription
+    /// Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information
     /// </summary>
-    public void Watch(MongoDBTriggerAttribute attribute,
-                      Action<MongoDBTriggerEventData> callback,
+    public override void Watch(MongoDBTriggerAttribute attribute,
+                      Action<string> callback,
                       CancellationToken cancellationToken)
     {
 
@@ -52,26 +41,31 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     }
 
     private void WatchWithInputMatchStage(MongoDBTriggerAttribute attribute,
-                                          Action<MongoDBTriggerEventData> callback,
+                                          Action<string> callback,
                                           ChangeStreamOptions options,
                                           BsonDocument changeStreamPipelineMatchStage,
                                           CancellationToken cancellationToken)
     {
-      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>().Match(changeStreamPipelineMatchStage);
+      /// CosmosDB has limitation with change stream with operationType & updateDescription. So excluding them in $project stage
+      /// Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information
+      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>()
+                    .Match(changeStreamPipelineMatchStage)
+                    .AppendStage<ChangeStreamDocument<BsonDocument>, ChangeStreamDocument<BsonDocument>, BsonDocument>(
+                    "{ $project: { '_id': 1, 'fullDocument': 1, 'ns': 1, 'documentKey': 1 }}");
       try
       {
         this.StartChangeStream(attribute, callback, pipeline, options, cancellationToken);
-        this.logger.LogInformation($"Started the change stream with pipeline : {pipeline.ToJson()}");
+        this.logger.LogInformation($"Started the CosmosDB change stream.");
       }
       catch (MongoException ex)
       {
-        this.logger.LogError(ex, $"Exception while starting the change stream with pipeline : {pipeline.ToJson()}");
+        this.logger.LogError(ex, $"Exception while starting the CosmosDB change stream.");
         throw new ArgumentException("Passed invalid pipeline match stage. Please refer the documentation to see the expected format.", ex);
       }
     }
 
     private void WatchWithBasicMatchStage(MongoDBTriggerAttribute attribute,
-                                          Action<MongoDBTriggerEventData> callback,
+                                          Action<string> callback,
                                           ChangeStreamOptions options,
                                           CancellationToken cancellationToken)
     {
@@ -84,11 +78,19 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
         matchStage.AddRange(new BsonDocument("$or", array));
         foreach (var field in watchFields)
         {
-          array.Add(new BsonDocument($"updateDescription.updatedFields.{field}", new BsonDocument("$exists", true)));
+          array.Add(new BsonDocument($"fullDocument.{field}", new BsonDocument("$exists", true)));
         }
       }
-      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>().Match(matchStage);
-      this.logger.LogInformation($"Started the change stream with pipeline : {pipeline.ToJson()}");
+
+
+      /// CosmosDB has limitation with change stream with operationType & updateDescription. So excluding them in $project stage
+      /// Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information
+      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>()
+                    .Match(matchStage)
+                    .AppendStage<ChangeStreamDocument<BsonDocument>, ChangeStreamDocument<BsonDocument>, BsonDocument>(
+                    "{ $project: { '_id': 1, 'fullDocument': 1, 'ns': 1, 'documentKey': 1 }}");
+
+      this.logger.LogInformation($"Started the CosmosDB change stream");
 
       try
       {
@@ -96,14 +98,14 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
       }
       catch (MongoException ex)
       {
-        this.logger.LogError(ex, $"Exception while starting the change stream with pipeline : {pipeline.ToJson()}");
+        this.logger.LogError(ex, $"Exception while starting the CosmosDB change stream");
         throw ex;
       }
     }
 
     private void StartChangeStream(MongoDBTriggerAttribute attribute,
-                       Action<MongoDBTriggerEventData> callback,
-                       PipelineDefinition<ChangeStreamDocument<BsonDocument>, ChangeStreamDocument<BsonDocument>> pipeline,
+                       Action<string> callback,
+                       PipelineDefinition<ChangeStreamDocument<BsonDocument>, BsonDocument> pipeline,
                        ChangeStreamOptions options,
                        CancellationToken cancellationToken)
     {
@@ -136,87 +138,36 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
       }
     }
 
-    private void IterateCursor(Action<MongoDBTriggerEventData> callback,
-                               IChangeStreamCursor<ChangeStreamDocument<BsonDocument>> cursor)
+    private void IterateCursor(Action<string> callback,
+                               IChangeStreamCursor<BsonDocument> cursor)
     {
       var enumerator = cursor.ToEnumerable().GetEnumerator();
       while (enumerator.MoveNext())
       {
-        ChangeStreamDocument<BsonDocument> change = enumerator.Current;
+        var ns = enumerator.Current.GetValue("ns").ToBsonDocument();
+        var databaseNameSpace = new DatabaseNamespace(ns.GetValue("db").ToString());
+        var collectionNamespace = new CollectionNamespace(databaseNameSpace, ns.GetValue("coll").ToString());
         var responseData = new MongoDBTriggerEventData()
         {
-          CollectionNamespace = change.CollectionNamespace,
-          DatabaseNamespace = change.DatabaseNamespace,
-          CollectionUuid = change.CollectionUuid,
-          DocumentKey = change.DocumentKey,
-          FullDocument = change.FullDocument,
-          FullDocumentBeforeChange = change.FullDocumentBeforeChange,
-          OperationType = change.OperationType,
-          ResumeToken = change.ResumeToken,
-          UpdateDescription = change.UpdateDescription,
-          WallTime = change.WallTime
+          CollectionNamespace = collectionNamespace,
+          DatabaseNamespace = databaseNameSpace,
+          DocumentKey = enumerator.Current.GetValue("documentKey").ToBsonDocument(),
+          FullDocument = enumerator.Current.GetValue("fullDocument").ToBsonDocument(),
         };
-        callback(responseData);
+        var responseDataJson = JsonConvert.SerializeObject(responseData);
+        callback(responseDataJson);
       }
     }
 
-    private BsonArray FetchOperations(MongoDBTriggerAttribute attribute)
+    protected override BsonArray FetchOperations(MongoDBTriggerAttribute attribute)
     {
       var operations = new BsonArray();
-      if (attribute.WatchInserts)
-      {
-        operations.Add("insert");
-      }
-
-      if (attribute.WatchUpdates)
-      {
-        operations.Add("update");
-      }
-
-      if (attribute.WatchDeletes)
-      {
-        operations.Add("delete");
-      }
-
-      if (attribute.WatchReplaces)
-      {
-        operations.Add("replace");
-      }
-
+      /// cannot support delete operation because of the follwing limitation
+      /// https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations
+      operations.Add("insert");
+      operations.Add("update");
+      operations.Add("replace");
       return operations;
-    }
-
-    private List<string> ParseWatchFields(string watchFields)
-    {
-      if (string.IsNullOrEmpty(watchFields))
-      {
-        return new List<string>();
-      }
-
-      string[] values = watchFields.Split(',');
-      for (int i = 0; i < values.Length; i++)
-      {
-        values[i] = values[i].Trim();
-      }
-
-      return values.ToList();
-    }
-
-    private BsonDocument ParseChangeStreamPipelineMatchStage(string pipeline)
-    {
-      if (string.IsNullOrEmpty(pipeline))
-      {
-        return null;
-      }
-
-      try
-      {
-        return BsonSerializer.Deserialize<BsonDocument>(pipeline);
-      }
-      catch (Exception ex)
-      {
-        throw new ArgumentException($"Passed invalid pipeline match stage. Please refer the documentation to see the expected format. Pipeline passed : {pipeline}", ex);
-      }
     }
   }
 }
