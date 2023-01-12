@@ -12,17 +12,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Setup .NET Core 2.1
-      uses: actions/setup-dotnet@v1
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 2.1.607
-    - name: Setup .NET Core 3.0
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.0.101
-    - name: .NET Core SxS
-      run: |
-                rsync -a ${DOTNET_ROOT/3.0.101/2.1.607}/* $DOTNET_ROOT/
+        dotnet-version: 6.0.x
+    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Install dependencies
+      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
     - name: Test
