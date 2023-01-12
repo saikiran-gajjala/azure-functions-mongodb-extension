@@ -4,7 +4,7 @@ using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using Newtonsoft.Json;
 
-namespace Peerislands.Azure.Functions.Extension.MongoDB
+namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Listener class that interacts with MongoDB and subscribes to changes to the registered documents.

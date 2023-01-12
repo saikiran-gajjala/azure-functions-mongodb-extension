@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs.Hosting;
 using Newtonsoft.Json;
 
-namespace Peerislands.Azure.Functions.Extension.MongoDB
+namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Configuration for MongoDb Azure Function extension.

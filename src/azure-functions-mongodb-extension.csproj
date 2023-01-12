@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>Peerislands.Azure.Functions.Extension.MongoDB</RootNamespace>
-    <PackageId>Peerislands.Azure.Functions.Extension.MongoDB</PackageId>
-    <AssemblyName>Peerislands.Azure.Functions.Extension.MongoDB</AssemblyName>
-    <Description>Peerislands Azure WebJobs SDK MongoDB Extension.</Description>
+    <RootNamespace>Hackathon.Azure.Functions.Extension.MongoDB</RootNamespace>
+    <PackageId>Hackathon.Azure.Functions.Extension.MongoDB</PackageId>
+    <AssemblyName>Hackathon.Azure.Functions.Extension.MongoDB</AssemblyName>
+    <Description>Azure WebJobs SDK MongoDB Extension.</Description>
     <Version>1.0.2</Version>
     <Authors>Sai Kiran Gajjala</Authors>
-    <Company>Peerislands.io</Company>
+    <Company>Hackathon</Company>
+    <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

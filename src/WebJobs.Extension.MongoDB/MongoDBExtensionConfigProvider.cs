@@ -4,7 +4,7 @@ using Microsoft.Azure.WebJobs.Host.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Peerislands.Azure.Functions.Extension.MongoDB
+namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDb Extension Config Provider class that implements <see cref="IExtensionConfigProvider"/> interface.

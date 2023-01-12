@@ -1,4 +1,4 @@
-namespace Peerislands.Azure.Functions.Extension.MongoDB
+namespace Hackathon.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Context class for MongoDB trigger.

@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Peerislands.Azure.Functions.Extension.MongoDB;
+using Hackathon.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
 {
