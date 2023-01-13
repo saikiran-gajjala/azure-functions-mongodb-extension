@@ -6,7 +6,7 @@
 ![main workflow](https://github.com/saikirann73/azure-functions-mongodb-extension/actions/workflows/build.yml/badge.svg)
 
 This repository contains MongoDb trigger extensions for the **Azure WebJobs SDK**. The communication with MongoDB is based on library **MongoDB.Driver**.
-Please find C# and Javascript The following samples [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/The following samples)
+Please find C# and Javascript The following samples [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/samples)
 
 ## Quick Start
 
@@ -81,4 +81,4 @@ The following sample azure function format listens to the MongoDB operations suc
 
 ## Azure Functions in different programming langugages
 
-Javascript The following sample azure function can be found [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/The following samples/javascript)
+Javascript The following sample azure function can be found [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/samples/javascript)
