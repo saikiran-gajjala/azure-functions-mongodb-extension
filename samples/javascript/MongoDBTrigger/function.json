@@ -6,10 +6,7 @@
             "database": "%database%",
             "collection": "%collection%",
             "isCosmosDB": true,
-            "watchInserts": false,
-            "watchUpdates": true,
-            "watchDeletes": false,
-            "watchReplaces": false,
+            "pipelineMatchStage": "pipelineMatchStage",
             "name": "eventData"
         }
     ]

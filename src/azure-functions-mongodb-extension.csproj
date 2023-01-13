@@ -6,7 +6,7 @@
     <PackageId>Hackathon.Azure.Functions.Extension.MongoDB</PackageId>
     <AssemblyName>Hackathon.Azure.Functions.Extension.MongoDB</AssemblyName>
     <Description>Azure WebJobs SDK MongoDB Extension.</Description>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Authors>Sai Kiran Gajjala</Authors>
     <Company>Hackathon</Company>
     <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>

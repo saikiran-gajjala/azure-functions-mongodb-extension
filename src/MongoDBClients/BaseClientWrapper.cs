@@ -31,6 +31,20 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
       }
     }
 
+    public BaseClientWrapper(IMongoClient mongoClient, ILogger logger)
+    {
+      this.logger = logger;
+      this.mongoClient = mongoClient;
+      try
+      {
+        var databaseName = this.mongoClient.ListDatabaseNames(); // Connectivity check
+      }
+      catch (MongoException)
+      {
+        throw new ArgumentException("Failed to connect to MongoDB. Please check if the connection string is valid or accessible from the azure function.");
+      }
+    }
+
     /// <summary>
     /// Initiates the MongoDB Change Stream on the target collection(s)
     /// </summary>

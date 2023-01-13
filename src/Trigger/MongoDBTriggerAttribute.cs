@@ -109,27 +109,20 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     /// Note: CosmosDB has limitation with change stream with operationType & updateDescription so the match stage should be defined accordingly.
     /// Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information.
     /// </param>
-    /// <param name="watchInserts">Flag to watch the insert operations</param>
-    /// <param name="watchUpdates">Flag to watch the update operations</param>
-    /// <param name="watchDeletes">Flag to watch the delete operations</param>
-    /// <param name="watchReplaces">Flag to watch the replace operations</param>
     public MongoDBTriggerAttribute(string connectionString,
                                    string database,
                                    string collection,
-                                   bool isCosmosDB,
-                                   bool watchInserts = true,
-                                   bool watchUpdates = true,
-                                   bool watchDeletes = true,
-                                   bool watchReplaces = true)
+                                   bool isCosmosDB)
     {
       this.ConnectionString = connectionString;
       this.Database = database;
       this.Collection = collection;
       this.IsCosmosDB = isCosmosDB;
-      this.WatchInserts = watchInserts;
-      this.WatchUpdates = watchUpdates;
-      this.WatchDeletes = watchDeletes;
-      this.WatchReplaces = watchReplaces;
+      // Note: Set the following boolean flags based on the limitation mentioned above.
+      this.WatchInserts = true;
+      this.WatchUpdates = true;
+      this.WatchDeletes = false;
+      this.WatchReplaces = true;
       this.PipelineMatchStage = null;
     }
 

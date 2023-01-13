@@ -14,9 +14,8 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
   /// </summary>
   public class CosmosDBClientWrapper : BaseClientWrapper
   {
-    public CosmosDBClientWrapper(string connectionString, ILogger logger) : base(connectionString, logger)
-    {
-    }
+    public CosmosDBClientWrapper(string connectionString, ILogger logger) : base(connectionString, logger) { }
+    public CosmosDBClientWrapper(IMongoClient mongoClient, ILogger logger) : base(mongoClient, logger) { }
 
     /// <summary>
     /// Initiates the MongoDB Change Stream on the target collection(s)
