@@ -64,22 +64,6 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
       return operations;
     }
 
-    protected List<string> ParseWatchFields(string watchFields)
-    {
-      if (string.IsNullOrEmpty(watchFields))
-      {
-        return new List<string>();
-      }
-
-      string[] values = watchFields.Split(',');
-      for (int i = 0; i < values.Length; i++)
-      {
-        values[i] = values[i].Trim();
-      }
-
-      return values.ToList();
-    }
-
     protected BsonDocument ParseChangeStreamPipelineMatchStage(string pipeline)
     {
       if (string.IsNullOrEmpty(pipeline))

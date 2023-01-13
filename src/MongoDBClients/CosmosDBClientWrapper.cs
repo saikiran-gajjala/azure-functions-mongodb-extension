@@ -71,18 +71,6 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
     {
       var operations = this.FetchOperations(attribute);
       var matchStage = new BsonDocument("operationType", new BsonDocument("$in", operations));
-      var watchFields = this.ParseWatchFields(attribute.WatchFields);
-      if (watchFields.Count > 0)
-      {
-        var array = new BsonArray();
-        matchStage.AddRange(new BsonDocument("$or", array));
-        foreach (var field in watchFields)
-        {
-          array.Add(new BsonDocument($"fullDocument.{field}", new BsonDocument("$exists", true)));
-        }
-      }
-
-
       /// CosmosDB has limitation with change stream with operationType & updateDescription. So excluding them in $project stage
       /// Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information
       var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>()

@@ -10,7 +10,6 @@
             "watchUpdates": true,
             "watchDeletes": false,
             "watchReplaces": false,
-            "watchFields": "total",
             "name": "eventData"
         }
     ]

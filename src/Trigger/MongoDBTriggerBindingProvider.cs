@@ -52,7 +52,6 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
       attribute.ConnectionString = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.ConnectionString);
       attribute.Database = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.Database);
       attribute.Collection = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.Collection);
-      attribute.WatchFields = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.WatchFields);
       attribute.PipelineMatchStage = this.config.ResolveConfigurationSetting(this.nameResolver, attribute.PipelineMatchStage);
       return attribute;
     }

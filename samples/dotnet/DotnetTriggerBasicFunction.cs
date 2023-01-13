@@ -10,14 +10,13 @@ namespace Trigger.Samples
     [FunctionName("Dotnet-Trigger-Basic-Function")]
     public static void Run(
     [MongoDBTrigger("%mongodb_connection_string%",
-                    "%database%",
-                    "%collection%",
-                    false,
-                    watchInserts: false,
-                    watchUpdates: true,
-                    watchDeletes : false,
-                    watchReplaces: false,
-                    watchFields: "total" )] string eventData,
+                   "%database%",
+                   "%collection%",
+                   false,
+                   watchInserts: true,
+                   watchUpdates: true,
+                   watchDeletes : true,
+                   watchReplaces: true)] string eventData,
     ILogger log)
     {
       log.LogInformation($"Change document obtained. Reponse: {eventData}");

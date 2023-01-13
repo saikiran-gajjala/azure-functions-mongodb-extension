@@ -61,18 +61,8 @@ namespace Hackathon.Azure.Functions.Extension.MongoDB
                                           CancellationToken cancellationToken)
     {
       var operations = this.FetchOperations(attribute);
-      var matchStage = new BsonDocument("operationType", new BsonDocument("$in", operations));
-      var watchFields = this.ParseWatchFields(attribute.WatchFields);
-      if (watchFields.Count > 0)
-      {
-        var array = new BsonArray();
-        matchStage.AddRange(new BsonDocument("$or", array));
-        foreach (var field in watchFields)
-        {
-          array.Add(new BsonDocument($"updateDescription.updatedFields.{field}", new BsonDocument("$exists", true)));
-        }
-      }
-      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>().Match(matchStage);
+      var operationDoc = new BsonDocument("operationType", new BsonDocument("$in", operations));
+      var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument<BsonDocument>>().Match(operationDoc);
       this.logger.LogInformation($"Started the MongoDB change stream.Mongo");
 
       try
