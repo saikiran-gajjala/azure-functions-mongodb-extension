@@ -4,14 +4,14 @@ using Hackathon.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
 {
-  public static class DotnetTriggerAdvancedFunction
+  public static class DotnetTriggerCosmosDBFunction
   {
-    [FunctionName("Dotnet-Trigger-Advanced-Function")]
+    [FunctionName("Dotnet-Trigger-CosmosDB-Function")]
     public static void Run(
-    [MongoDBTrigger(connectionString: "%mongodb_connection_string%",
+    [MongoDBTrigger(connectionString: "%cosmosdb_connection_string%",
                    database:"%database%",
                    collection: "%collection%",
-                   pipelineMatchStage: "%pipelineMatchStage%")] string eventData,
+                   isCosmosDB: true)] string eventData,
     ILogger log)
     {
       log.LogInformation($"Change document obtained. Reponse: {eventData}");

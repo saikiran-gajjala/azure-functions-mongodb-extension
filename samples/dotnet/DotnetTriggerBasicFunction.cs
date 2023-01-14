@@ -1,6 +1,5 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Hackathon.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
@@ -9,9 +8,9 @@ namespace Trigger.Samples
   {
     [FunctionName("Dotnet-Trigger-Basic-Function")]
     public static void Run(
-    [MongoDBTrigger("%mongodb_connection_string%",
-                   "%database%",
-                   "%collection%",
+    [MongoDBTrigger(connectionString: "%mongodb_connection_string%",
+                   database: "%database%",
+                   collection: "%collection%",
                    false,
                    watchInserts: true,
                    watchUpdates: true,
