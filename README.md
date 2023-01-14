@@ -1,12 +1,12 @@
-# Azure Functions extensions for MongoDB.
+# Azure Functions Trigger Extension for MongoDB.
 
 | Branch | Status |
 | ------ | ------ |
 
-![main workflow](https://github.com/saikirann73/azure-functions-mongodb-extension/actions/workflows/build.yml/badge.svg)
+![main workflow](https://github.com/saikiran-gajjala/azure-functions-mongodb-extension/actions/workflows/build.yml/badge.svg)
 
 This repository contains MongoDb trigger extensions for the **Azure WebJobs SDK**. The communication with MongoDB is based on library **MongoDB.Driver**.
-Please find C# and Javascript The following samples [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/samples)
+Please find C# and Javascript The following samples [here](https://github.com/saikiran-gajjala/azure-functions-mongodb-extension/tree/main/samples)
 
 ## Quick Start
 
@@ -57,7 +57,7 @@ The following sample azure function format listens to the MongoDB documents sati
 
 ## Support for CosmosDB's MongoDB API
 
-The Trigger also supports for the CosmosDB's MongoDB API. To use it for CosmosDB check the other constructors in the [MongoDBTriggerAttribute](https://github.com/Saikirann73/azure-functions-mongodb-extension/blob/main/src/Trigger/MongoDBTriggerAttribute.cs) class.
+The Trigger also supports for the CosmosDB's MongoDB API. To use it for CosmosDB check the other constructors in the [MongoDBTriggerAttribute](https://github.com/saikiran-gajjala/azure-functions-mongodb-extension/blob/main/src/Trigger/MongoDBTriggerAttribute.cs) class.
 
 **Note**: CosmosDB has limitation with change stream with operationType & updateDescription. Please refer the https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/change-streams?tabs=csharp#current-limitations for more information. So only insert, update and replace operations are supported.
 
@@ -79,6 +79,7 @@ The following sample azure function format listens to the MongoDB operations suc
   }
 ```
 
-## Azure Functions in different programming langugages
+## Support for other programming langugages
 
-Javascript The following sample azure function can be found [here](https://github.com/Saikirann73/azure-functions-mongodb-extension/tree/main/samples/javascript)
+Apart from C#, the extension can also be used in Azure Functions in various programming languages such as JavaScript, Java, TypeScript, F#, Go, Python.
+The sample azure function for JavaScript can be found [here](https://github.com/saikiran-gajjala/azure-functions-mongodb-extension/tree/main/samples/javascript)
