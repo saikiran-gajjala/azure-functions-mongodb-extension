@@ -1,0 +1,17 @@
+{
+  "scriptFile": "main.py",
+  "bindings": [
+    {
+      "type": "mongoDBTrigger",
+      "connectionString": "%mongodb_connection_string%",
+      "database": "%database%",
+      "collection": "%collection%",
+      "isCosmosDB": false,
+      "watchInserts": true,
+      "watchUpdates": true,
+      "watchReplaces": true,
+      "watchDeletes": false,
+      "name": "eventData"
+    }
+  ]
+}
