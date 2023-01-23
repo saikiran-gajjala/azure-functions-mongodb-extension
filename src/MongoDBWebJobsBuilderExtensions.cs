@@ -2,7 +2,7 @@ using System;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Class with extention methods for <see cref="IWebJobsBuilder"/> interface.

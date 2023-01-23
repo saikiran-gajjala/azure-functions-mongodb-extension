@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Listener class that interacts with MongoDB and subscribes to changes to the registered documents.

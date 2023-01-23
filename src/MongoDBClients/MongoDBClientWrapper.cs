@@ -5,7 +5,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDB client wrapper class that interacts with MongoDB using MongoDB driver.

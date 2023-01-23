@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Value Binder class

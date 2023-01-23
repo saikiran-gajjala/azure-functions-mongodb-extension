@@ -1,7 +1,7 @@
 using Microsoft.Azure.WebJobs.Logging;
 using Microsoft.Extensions.Logging;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Implementation class for <see cref="IMongoDBServiceFactory"/> interface.

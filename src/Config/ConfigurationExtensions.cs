@@ -2,7 +2,7 @@
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Configuration;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// Extension Methods for IConfiguration

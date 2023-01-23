@@ -6,7 +6,7 @@
             "database": "%database%",
             "collection": "%collection%",
             "isCosmosDB": true,
-            "pipelineMatchStage": "pipelineMatchStage",
+            "pipelineMatchStage": "%pipelineMatchStage%",
             "name": "eventData"
         }
     ]

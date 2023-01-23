@@ -1,6 +1,6 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Hackathon.Azure.Functions.Extension.MongoDB;
+using Custom.Azure.Functions.Extension.MongoDB;
 
 namespace Trigger.Samples
 {

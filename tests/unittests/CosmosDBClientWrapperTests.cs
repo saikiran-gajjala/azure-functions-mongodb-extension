@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Bson;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB.UnitTests;
+namespace Custom.Azure.Functions.Extension.MongoDB.UnitTests;
 
 public class CosmosDBDBClientWrapperTests
 {

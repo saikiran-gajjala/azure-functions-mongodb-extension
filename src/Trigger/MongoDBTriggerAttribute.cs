@@ -2,7 +2,7 @@ using System;
 using Microsoft.Azure.WebJobs.Description;
 using MongoDB.Driver;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB
+namespace Custom.Azure.Functions.Extension.MongoDB
 {
   /// <summary>
   /// MongoDB Trigger Attribute Class to decorate paramaters for the function run method.

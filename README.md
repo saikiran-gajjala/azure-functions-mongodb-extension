@@ -12,7 +12,7 @@ Please find C# and Javascript The following samples [here](https://github.com/sa
 
 ### Bindings
 
-To get started using the extension in a WebJob project add reference to Hackathon.Azure.Functions.Extension.MongoDB nuget package:
+To get started using the extension in a WebJob project add reference to Custom.Azure.Functions.Extension.MongoDB nuget package:
 
 The following sample azure function format listens to the MongoDB operations such as insert, update, delete and replace.
 

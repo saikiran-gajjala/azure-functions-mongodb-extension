@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
-namespace Hackathon.Azure.Functions.Extension.MongoDB.UnitTests;
+namespace Custom.Azure.Functions.Extension.MongoDB.UnitTests;
 
 public class MongoDBDBClientWrapperTests
 {
