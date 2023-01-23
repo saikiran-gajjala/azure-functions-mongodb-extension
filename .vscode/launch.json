@@ -12,7 +12,7 @@
             "targetArchitecture": "x86_64"
         },
         {
-            "name": "Attach to Node Functions",
+            "name": "Attach to Javascript Functions",
             "type": "node",
             "request": "attach",
             "port": 9229,
